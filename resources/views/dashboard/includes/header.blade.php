@@ -169,11 +169,62 @@
               </div>
             </li>
             <li class="dropdown dropdown-language nav-item"><a class="dropdown-toggle nav-link" id="dropdown-flag" href="#" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false"><i class="flag-icon flag-icon-gb"></i><span class="selected-language"></span></a>
-              <div class="dropdown-menu" aria-labelledby="dropdown-flag"><a class="dropdown-item" href="#"><i class="flag-icon flag-icon-gb"></i> English</a>
-                <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a>
-                <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-cn"></i> Chinese</a>
-                <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-de"></i> German</a>
+              aria-haspopup="true" aria-expanded="false"><i @switch(App::getLocale())
+              @case('en')
+                  class="flag-icon flag-icon-gb"
+                  @break
+
+              @case('fr')
+              class="flag-icon flag-icon-fr"
+                  @break
+
+              @case('ar')
+              class="flag-icon flag-icon-eg"
+                  @break
+
+              @case('de')
+              class="flag-icon flag-icon-de"
+                  @break
+
+
+          @endswitch></i><span class="selected-language"></span></a>
+              <div class="dropdown-menu" aria-labelledby="dropdown-flag">
+                <ul>
+                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                        <li>
+
+                            <a  rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                <i @switch($localeCode)
+                                @case('en')
+                                    class="flag-icon flag-icon-gb"
+                                    @break
+
+                                @case('fr')
+                                class="flag-icon flag-icon-fr"
+                                    @break
+
+                                @case('ar')
+                                class="flag-icon flag-icon-eg"
+                                    @break
+
+                                @case('de')
+                                class="flag-icon flag-icon-de"
+                                    @break
+
+
+                            @endswitch></i> {{ $properties['native'] }}
+                            </a>
+
+
+                        </li>
+
+                    @endforeach
+                </ul>
+
+                {{-- <a class="dropdown-item" ><i class="flag-icon flag-icon-gb"></i> English</a>
+                <a class="dropdown-item" ><i class="flag-icon flag-icon-fr"></i> French</a>
+                <a class="dropdown-item" ><i class="flag-icon flag-icon-eg"></i> Arabic</a>
+                <a class="dropdown-item" ><i class="flag-icon flag-icon-de"></i> German</a> --}}
               </div>
             </li>
             <li class="dropdown dropdown-notification nav-item">

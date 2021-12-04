@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMainCategoryTable extends Migration
+class CreateSubCategorysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateMainCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('main_category', function (Blueprint $table) {
+        Schema::create('sub_categorys', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('online');
+            $table->text('picture')->nullable();
+            $table->string('slug')->nullable()->unique();
+            $table->boolean('is_active');
             $table->timestamps();
+
+            $table->foreign('cat_id')->references('id')->on('main_category')->onDelete('cascade');
         });
     }
 
@@ -27,6 +31,6 @@ class CreateMainCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('main_category');
+        Schema::dropIfExists('sub_categorys');
     }
 }

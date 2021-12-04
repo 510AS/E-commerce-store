@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MainCategoryTranslation extends Model
+class SubCategoryTranslation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+
 
     public $timestamps = false;
 

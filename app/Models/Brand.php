@@ -7,11 +7,11 @@ use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MainCategory extends Model implements TranslatableContract
+class Brand extends Model implements TranslatableContract
 {
     use Translatable;
 
-    protected $table ='main_category';
+
 
     protected $fillable = ['slug', 'is_active','picture'];
 
@@ -23,10 +23,7 @@ class MainCategory extends Model implements TranslatableContract
         return  $this -> is_active  == 0 ?  'offline '   : 'online' ;
      }
 
-     public function subCategory()
-     {
-         return $this->hasMany(SubCategory::class);
-     }
+     
 
 
 }

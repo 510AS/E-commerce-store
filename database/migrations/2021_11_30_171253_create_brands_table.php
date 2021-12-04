@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMainCategoryTable extends Migration
+class CreateBrandsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateMainCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('main_category', function (Blueprint $table) {
+        Schema::create('brands', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('online');
+            $table->text('picture')->nullable();
+            $table->string('slug')->nullable()->unique();
+            $table->boolean('is_active')->default(0);
             $table->timestamps();
+
         });
     }
 
@@ -27,6 +30,6 @@ class CreateMainCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('main_category');
+        Schema::dropIfExists('brands');
     }
 }
